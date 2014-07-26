@@ -25,7 +25,7 @@ MAST_INITIAL_POS = .15
 MAST_GROTH_X = .35
 MAST_POS_Y  = 0
 
-Builder.load_file('gameboard.kv') # charge le fichier kv
+#Builder.load_file('gameboard.kv') # charge le fichier kv
 
 class Disc(Button):
     ''' Disc object '''
