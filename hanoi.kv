@@ -1,0 +1,107 @@
+# hanoi.kv
+#:import RiseInTransition kivy.uix.screenmanager.RiseInTransition
+#:import Animation kivy.animation
+
+<ScreenColor>:
+    name: 'screen_color'
+    ColorPicker:
+        color: root.manager.selected_color
+        on_color: root.manager.selected_color=self.color    
+    Button:
+        text: 'RETOUR'
+        size_hint: None,None
+        size: 100,100
+        pos: 300,0
+        on_press: root.manager.current = 'screen_menu'
+
+
+<ScreenMenu>:
+    name: 'screen_menu'
+    BoxLayout:
+        canvas:
+            Color:
+                rgb: root.manager.selected_color
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        orientation: 'vertical'
+        spacing: 10
+        padding: [100]
+        BoxLayout:
+            orientation: 'vertical'
+        BoxLayout:
+            orientation: 'vertical'
+            Button: 
+                text: 'TOURS DE HANOI'
+            Button: 
+                text: 'NOUVELLE PARTIE'
+                on_press: root.manager.current = 'screen_game' 
+            Button:
+                text: 'CHARGER UNE PARTIE'
+                on_press: root.manager.current = 'screen_load' 
+            Button:
+                text: 'OPTIONS'
+                on_press: root.manager.current = 'screen_color'
+            Button:
+                text: 'QUITTER'
+                on_press:
+        BoxLayout:
+            orientation: 'vertical'
+<ScreenGame>:
+    name: 'screen_game'
+    BoxLayout:
+        canvas:
+            Color:
+                rgb: root.manager.selected_color
+            Rectangle:
+                pos: self.pos
+                size: self.size        
+        color: root.manager.selected_color
+        orientation: 'vertical'
+        spacing: 10
+        BoxLayout:
+            size_hint: 1, 1
+        Game:
+            ring_number: 3
+        BoxLayout:
+            padding: 20
+            size_hint: 1, 1
+            Button:
+                text: 'RETOUR'
+                size_hint: 0.5, 0.4
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                on_press: root.manager.current = 'screen_menu'
+        
+<ScreenLoad>:
+    name: 'screen_load'
+    BoxLayout:
+        canvas:
+            Color:
+                rgb: root.manager.selected_color
+            Rectangle:
+                pos: self.pos
+                size: self.size        
+        color: root.manager.selected_color
+        orientation: 'vertical'
+        spacing: 10
+        padding: [100]
+        Button: 
+            text: 'RECHARGEMENT EN COURS'
+    Button:
+        text: 'RETOUR'
+        size_hint: None,None
+        size: 100,100
+        pos: 300,0
+        on_press: root.manager.current = 'screen_menu'            
+
+<Hanoi>:
+    canvas:
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    transition: RiseInTransition()
+    ScreenMenu:
+    ScreenColor:
+    ScreenGame:
+    ScreenLoad:
+
